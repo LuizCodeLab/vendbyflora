@@ -1,0 +1,51 @@
+{
+  "name": "VendByFlora",
+  "version": "1.0.0",
+  "description": "Sistema desktop para controle de envio de mensagens de novos produtos para clientes(VendByFlora)",
+  "author": "LuizCodeLab",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "dist": "npm run build:frontend && electron-builder"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^4.22.2",
+    "multer": "^2.0.0",
+    "sql.js": "^1.14.2"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^26.15.3"
+  },
+  "allowScripts": {
+    "electron@31.7.7": true,
+    "electron-winstaller@5.4.0": true
+  },
+  "build": {
+    "appId": "com.vendbyflora.app",
+    "productName": "VendByFlora",
+    "files": [
+      "main.js",
+      "preload.js",
+      "backend/**/*",
+      "frontend/dist/**/*",
+      "build/icon.*",
+      "!backend/loja.db",
+      "!backend/produtos-imagens/**"
+    ],
+    "asarUnpack": [
+      "node_modules/sql.js/dist/sql-wasm.wasm"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
